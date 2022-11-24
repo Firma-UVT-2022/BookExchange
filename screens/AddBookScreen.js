@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { firestore } from "../firebase";
 import { auth } from "../firebase";
 
-const HomeScreen = ({navigation}) => {
+const ChatsScreen = ({navigation}) => {
     const [userData, setData] = useState('');
     
     useEffect(() => {
@@ -21,15 +21,13 @@ const HomeScreen = ({navigation}) => {
 
     return (
         <SafeAreaView style={styles.cotainer}>
-            <Text style={styles.welcomeFont}>Salut, {userData.firstname}!</Text>
+            <Text style={styles.welcomeFont}>Add, {userData.firstname}!</Text>
             <Button title="Inapoi" onPress={()=>{navigation.navigate("Login")}}></Button>
-
-            
         </SafeAreaView>
     )
 }
 
-export default HomeScreen
+export default ChatsScreen
 
 const styles = StyleSheet.create({
     cotainer: {
@@ -41,4 +39,20 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "200",
     },
+    bottomButtons: {
+        backgroundColor: "#0782F9",
+        borderTopWidth: 1,
+        width: "100%",
+        height: 60,
+        flexDirection: "row",
+        justifyContent: "space-around",
+        alignItems: "center",
+        position: "absolute",
+        bottom: 0,
+    },
+    bottomImgs: {
+        width: 45,
+        height: 45,
+        resizeMode: "stretch",
+    }
 })

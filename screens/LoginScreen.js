@@ -2,25 +2,29 @@ import React from "react";
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View
         , Image } from "react-native";
 import { useState } from "react";
-import { auth } from '../firebase'
+import { auth } from '../firebase';
 
 const LoginScreen = ({navigation}) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-        
-    const handleSignUp = () => {
-        auth.createUserWithEmailAndPassword(email, password)
-        .then(alert("Succesfully registered!"))
-        .catch(error => alert(error.message))
-    }
 
-    const handleLogin = () => {
-        auth.signInWithEmailAndPassword(email, password)
-        .then(navigation.navigate("Home"))
+    const handleLogin = async () => {
+        let threwError = false;
+        await auth.signInWithEmailAndPassword(email, password)
         .catch(error => {
             alert(error.message);
-            navigation.navigate("Login");
-        })
+            threwError = true;
+        });
+
+        if(!threwError)
+        {
+            if(!auth.currentUser.emailVerified){
+                alert("Verify your email to continue");
+            }
+            else{
+                navigation.navigate("Tabs");
+            }
+        }
     }
 
     return (
@@ -54,12 +58,14 @@ const LoginScreen = ({navigation}) => {
                     <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity
-                    onPress={handleSignUp} 
-                    style={[styles.button, styles.buttonOutline]}
+
+                <TouchableOpacity 
+                    onPress={() => {navigation.navigate("Register")}}
+                    style={{margin: 15}}
                 >
-                    <Text style={styles.buttonOutLineText}>Register</Text>
+                    <Text style={styles.signUpText}>Create a new account</Text>
                 </TouchableOpacity>
+                
             </View>
 
         </KeyboardAvoidingView>
@@ -111,6 +117,11 @@ const styles = StyleSheet.create({
     buttonOutLineText:{
         color: "#0782F9",
         fontWeight: "700",
+        fontSize: 16,
+    },
+    signUpText: {
+        color: "#0872F9",
+        fontWeight: "320",
         fontSize: 16,
     },
 })

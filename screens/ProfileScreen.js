@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { firestore } from "../firebase";
 import { auth } from "../firebase";
 
-const HomeScreen = ({navigation}) => {
+const ProfileScreen = ({navigation}) => {
     const [userData, setData] = useState('');
     
     useEffect(() => {
@@ -21,15 +21,13 @@ const HomeScreen = ({navigation}) => {
 
     return (
         <SafeAreaView style={styles.cotainer}>
-            <Text style={styles.welcomeFont}>Salut, {userData.firstname}!</Text>
+            <Text style={styles.welcomeFont}>Profil, {userData.firstname}!</Text>
             <Button title="Inapoi" onPress={()=>{navigation.navigate("Login")}}></Button>
-
-            
         </SafeAreaView>
     )
 }
 
-export default HomeScreen
+export default ProfileScreen
 
 const styles = StyleSheet.create({
     cotainer: {
