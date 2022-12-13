@@ -12,6 +12,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import HomeScreen from './screens/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ChatsScreen from './screens/ChatsScreen';
+import AddBookScreen from './screens/AddBookScreen';
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen name="Add" component={AddBookScreen} />
         <Stack.Screen name="Tabs" options={{headerShown: false}} component={Tabs} />
       </Stack.Navigator>
     </NavigationContainer>
