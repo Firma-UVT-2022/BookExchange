@@ -41,7 +41,7 @@ const HomeScreen = ({navigation}) => {
                     firstname: firstname,
                     lastname: lastname,
                     email: email,
-                    pfp: "default",
+                    pfp: "https://firebasestorage.googleapis.com/v0/b/bookexchange-d2fd4.appspot.com/o/pfps%2Fdefaultpfp.jpg?alt=media&token=2f420b16-28bc-4fb3-9bc9-fbae069da98f",
                 })
             .catch(error => {
                 alert(error.message);
