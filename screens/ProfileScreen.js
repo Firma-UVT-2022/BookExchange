@@ -77,7 +77,7 @@ const ProfileScreen = ({navigation}) => {
                 </View>
 
                 <TouchableOpacity 
-                    onPress={() => {navigation.navigate("AddNewPost")}}
+                    onPress={() => {navigation.navigate("Add")}}
                     style={styles.button}
                 >
                     <Text style={styles.buttonText}>Add a new book!</Text>
