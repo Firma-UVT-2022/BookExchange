@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  FlatList,
+  StatusBar
 } from "react-native";
 import { useState, useEffect } from "react";
 
@@ -18,6 +20,7 @@ import CardAnunt from "../cards/FeedAnuntCard";
 
 const HomeScreen = ({ navigation }) => {
   const [userData, setData] = useState("");
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     firestore
@@ -31,51 +34,45 @@ const HomeScreen = ({ navigation }) => {
       });
   }, []);
 
-  return (
-    // <SafeAreaView style={styles.cotainer}>
-    //     <Text style={styles.welcomeFont}>Salut, {userData.firstname}!</Text>
-    //     <Button title="Inapoi" onPress={()=>{navigation.navigate("Login")}}></Button>
+  useEffect(() => {
+    firestore.collection("books")
+    .onSnapshot(querrySnapshot => {
+      const tempPosts = [];
 
-    // </SafeAreaView>
+      querrySnapshot.forEach(documentSnapshot => {
+          const buffer = documentSnapshot.data();
+          tempPosts.push({
+              ...buffer
+          });
+      });
+
+      setPosts(tempPosts);
+    });
+  }, []);
+
+
+  return (
     <View style={styles.cotainer}>
-      <ScrollView contentContainerStyle={styles.scroll}>
-        <CardAnunt
-          numeCarte="JFK"
-          numeAutor="Stephen King"
-          genCarte="Drama"
-          numeUser="Sebastian Bitica"
-          imageuri="https://imagini.printrecarti.ro/images/products/originals/141/stephen-king-jfk_141248.jpg"
-          navigation={navigation}
-        />
-        <View style={{ height: 30 }} />
-        <CardAnunt
-          numeCarte="Interpretarea Viselor"
-          numeAutor="Sigmund Freud"
-          genCarte="Scientific"
-          numeUser="Todea Tudor"
-          imageuri="https://i.ytimg.com/vi/OtS9pVQ_eZk/hqdefault.jpg"
-          navigation={navigation}
-        />
-        <View style={{ height: 30 }} />
-        <CardAnunt
-          numeCarte="Biblia"
-          numeAutor="Dumnezeu"
-          genCarte="Religioasa"
-          numeUser="Calin Bordeanu"
-          imageuri="https://edituraagapis.ro/wp-content/uploads/2021/05/carti-agapis-mock-up-personal-biblia-.jpeg"
-          navigation={navigation}
-        />
-        <View style={{ height: 30 }} />
-        <CardAnunt
-          numeCarte="A tour of C++"
-          numeAutor="Bjarne Stroustrup"
-          genCarte="Programare"
-          numeUser="Bonchis Cosmin"
-          imageuri="https://di2ponv0v5otw.cloudfront.net/posts/2022/02/10/620532ec800f64ea3b2b0e77/m_620532f3c693bdca6fb23279.jpg"
-          navigation={navigation}
-        />
-        <View style={{ height: 30 }} />
-      </ScrollView>
+      <View style={styles.topBar}>
+          <Text style={{fontSize: 30, fontWeight: "400"}}>Feed</Text>
+      </View>
+
+      <FlatList 
+          style={{marginBottom: 100, marginTop: 10}}
+          data={posts}
+          renderItem={({item}) => (
+            <View style={{alignItems:"center", padding: 10}}>
+              <CardAnunt
+                numeCarte={item.bookName}
+                numeAutor={item.authorName}
+                genCarte={item.genre}
+                imageuri={item.imgUrl}
+                numeUser={item.ownerName}
+                navigation={navigation}
+              />
+            </View>
+            )}
+      />
     </View>
   );
 };
@@ -84,6 +81,7 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   cotainer: {
+    paddingTop: StatusBar.currentHeight, 
     flex: 1,
   },
   welcomeFont: {
@@ -94,5 +92,12 @@ const styles = StyleSheet.create({
     paddingTop: 60,
     alignItems: "center",
     paddingBottom: 100,
+  },
+  topBar:{
+    width: "100%",
+    backgroundColor: "#5792F9",
+    height: 80,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
