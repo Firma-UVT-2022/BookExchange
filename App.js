@@ -20,7 +20,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="Add" component={AddBookScreen} />
+        <Stack.Screen name="Add" options={{headerShown: false}} component={AddBookScreen} />
         <Stack.Screen name="Tabs" options={{headerShown: false}} component={Tabs} />
       </Stack.Navigator>
     </NavigationContainer>

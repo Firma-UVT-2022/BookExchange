@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { StyleSheet, Text, View, SafeAreaView, Button,
-     TouchableOpacity, Image, ScrollView, StatusBar, Platform } from "react-native";
+     TouchableOpacity, Image, ScrollView, StatusBar, Platform, FlatList } from "react-native";
 import { useState, useEffect } from "react";
 import * as ImagePicker from 'expo-image-picker';
 
@@ -8,16 +8,13 @@ import { firestore } from "../firebase";
 import { auth } from "../firebase";
 import { storage } from "../firebase";
 
-import { BottomTabBarHeightCallbackContext } from "@react-navigation/bottom-tabs";
-import { useNavigationState } from "@react-navigation/native";
-import { isSearchBarAvailableForCurrentPlatform } from "react-native-screens";
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import CardAnunt from "../cards/ProfileAnuntCard";
 
 const ProfileScreen = ({navigation}) => {
     const [userData, setData] = useState('');
-
-    let imguri = null;
+    const [posts, setPosts] = useState([]);
 
     useEffect(() => {
         firestore.collection("users")
@@ -28,6 +25,26 @@ const ProfileScreen = ({navigation}) => {
             }
         });
     }, []);
+
+    useEffect(() => {
+        firestore.collection("books")
+        .onSnapshot(querrySnapshot => {
+          const tempPosts = [];
+    
+          querrySnapshot.forEach(documentSnapshot => {
+              const buffer = documentSnapshot.data();
+              if(buffer.ownerID === auth.currentUser.uid){
+                tempPosts.push({
+                  ...buffer
+                });
+              }
+          });
+    
+          setPosts(tempPosts);
+        });
+      }, []);
+
+    let imguri = null;
 
     const pickImage = async () => {
         const {granted} = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -63,7 +80,6 @@ const ProfileScreen = ({navigation}) => {
 
     return (
         <SafeAreaView style={styles.cotainer}>
-            <ScrollView>
                 <View style={styles.topContainer}>
                     <TouchableOpacity onPress={pickImage}>
                         <Image style={styles.pfp} source={{uri: userData.pfp}}/>
@@ -83,7 +99,22 @@ const ProfileScreen = ({navigation}) => {
                     <Text style={styles.buttonText}>Add a new book!</Text>
                 </TouchableOpacity>
 
-            </ScrollView>
+                <FlatList 
+                    style={{marginBottom: 100, marginTop: 10}}
+                    data={posts}
+                    renderItem={({item}) => (
+                        <View style={{alignItems:"center", padding: 10}}>
+                            <CardAnunt
+                                numeCarte={item.bookName}
+                                numeAutor={item.authorName}
+                                genCarte={item.genre}
+                                imageuri={item.imgUrl}
+                                numeUser={item.ownerName}
+                                navigation={navigation}
+                            />
+                        </View>
+                    )}
+                />
         </SafeAreaView>
     )
 }
