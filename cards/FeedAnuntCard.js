@@ -6,6 +6,7 @@ import {
   Image,
   ImageBackground,
 } from "react-native";
+import BookPage from "../screens/BookPage";
 
 const icon_writer = "https://cdn-icons-png.flaticon.com/512/1948/1948210.png";
 const icon_booktype = "https://cdn-icons-png.flaticon.com/512/5768/5768762.png";
@@ -67,13 +68,22 @@ export default function CardAnunt({
   imageuri,
   numeUser,
   navigation,
-  undeNavighez,
+  pfpOwner,
+  locatie,
 }) {
   return (
     <TouchableOpacity
       style={styles.card}
       onPress={() => {
-        navigation.navigate("Profile");
+        navigation.navigate("BookPage", {
+          numeCarte: numeCarte,
+          imgCarte: imageuri,
+          numeAutor: numeAutor,
+          genCarte: genCarte,
+          numeUser: numeUser,
+          pfpOwner: pfpOwner,
+          locatie: locatie,
+        });
       }}
     >
       {/*pe ce pagina intri dupa ce apesi anuntul*/}
@@ -95,7 +105,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "90%",
     height: 200,
-    backgroundColor: "#7088e6",
+    //#7088e6
+    backgroundColor: "#5792F9",
     borderRadius: 15,
     elevation: 10,
     padding: 10,
