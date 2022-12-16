@@ -101,6 +101,7 @@ const ProfileScreen = ({navigation}) => {
 
                 <FlatList 
                     style={{marginBottom: 100, marginTop: 10}}
+                    contentContainerStyle={{marginBottom:100}}
                     data={posts}
                     renderItem={({item}) => (
                         <View style={{alignItems:"center", padding: 10}}>
