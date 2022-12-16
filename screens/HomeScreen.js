@@ -63,7 +63,7 @@ const HomeScreen = () => {
     });
     console.log("baaa", filtered);
     setFiltered("False");
-  }, [filtered]);
+  }, [county, genre, filtered]);
 
   const Filtrare = () => {
     setFiltered(true);
