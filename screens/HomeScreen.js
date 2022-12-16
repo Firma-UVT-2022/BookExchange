@@ -41,9 +41,11 @@ const HomeScreen = ({ navigation }) => {
 
       querrySnapshot.forEach(documentSnapshot => {
           const buffer = documentSnapshot.data();
-          tempPosts.push({
+          if(buffer.ownerID !== auth.currentUser.uid){
+            tempPosts.push({
               ...buffer
-          });
+            });
+          }
       });
 
       setPosts(tempPosts);
