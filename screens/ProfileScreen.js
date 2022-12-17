@@ -82,6 +82,7 @@ const ProfileScreen = ({navigation}) => {
         const newPfpURL = await storage.ref("pfps/" + filename).getDownloadURL();
         
         await firestore.collection("users").doc(userData.userId).update({pfp: newPfpURL});
+        changedPfpFunc();
     };
 
     const changedPfpFunc = () => {
