@@ -30,6 +30,7 @@ const HomeScreen = () => {
   const [posts, setPosts] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [filtered, setFiltered] = useState(false);
+
   let county = null;
   let genre = null;
 
@@ -43,15 +44,10 @@ const HomeScreen = () => {
       const tempPosts = [];
       querrySnapshot.forEach((documentSnapshot) => {
         const buffer = documentSnapshot.data();
-        console.log(
-          buffer.county === county || county == null,
-          buffer.genre === genre || genre == null
-        );
-        console.log(county, genre);
         if (
           buffer.ownerID !== auth.currentUser.uid &&
-          (buffer.county === county || county == null) &&
-          (buffer.genre === genre || genre == null)
+          (buffer.county === county || county == null || county == "All counties") &&
+          (buffer.genre === genre || genre == null || genre == "All genres")
         ) {
           tempPosts.push({
             ...buffer,
@@ -59,11 +55,9 @@ const HomeScreen = () => {
         }
       });
       setPosts(tempPosts);
-      console.log(tempPosts);
     });
-    console.log("baaa", filtered);
     setFiltered("False");
-  }, [filtered]);
+  }, [county, genre, filtered]);
 
   const Filtrare = () => {
     setFiltered(true);
@@ -124,14 +118,14 @@ export function FeedName() {
     <View style={styles.feed_name}>
       <Image
         style={{
-          width: 30,
-          height: 30,
+          width: 40,
+          height: 40,
         }}
         source={{
           uri: "https://cdn-icons-png.flaticon.com/512/5868/5868234.png",
         }}
       />
-      <Text style={{ fontSize: 30, fontWeight: "bold", fontStyle: "italic" }}>
+      <Text style={{ fontSize: 25, padding: 10, fontWeight: "bold", }}>
         Feed
       </Text>
     </View>
@@ -145,27 +139,23 @@ const styles = StyleSheet.create({
   },
   topBar: {
     width: "100%",
-    backgroundColor: "#5792F9",
-    height: 80,
+    backgroundColor: "#2490ef",
+    padding: 15,
     alignItems: "center",
     justifyContent: "center",
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
     elevation: 20,
     flexDirection: "row",
-    paddingLeft: 15,
-    paddingRight: 15,
   },
   feed_name: {
     flexDirection: "row",
     width: "50%",
-    height: "100%",
     alignItems: "center",
     justifyContent: "flex-start",
   },
   feed_filter: {
     width: "50%",
-    height: "100%",
     alignItems: "flex-end",
     justifyContent: "center",
   },

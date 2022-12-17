@@ -10,11 +10,16 @@ import { storage } from "../firebase";
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+import { RefreshControl } from "react-native";
+
 import CardAnunt from "../cards/ProfileAnuntCard";
 
 const ProfileScreen = ({navigation}) => {
     const [userData, setData] = useState('');
     const [posts, setPosts] = useState([]);
+
+    const [refreshing, setRefreshing] = useState(false);
+    const [changedPfp, setChanged] = useState(false);
 
     useEffect(() => {
         firestore.collection("users")
@@ -24,7 +29,8 @@ const ProfileScreen = ({navigation}) => {
                 setData(snapshot.data());
             }
         });
-    }, []);
+        setChanged(false);
+    }, [changedPfp]);
 
     useEffect(() => {
         firestore.collection("books")
@@ -78,6 +84,10 @@ const ProfileScreen = ({navigation}) => {
         await firestore.collection("users").doc(userData.userId).update({pfp: newPfpURL});
     };
 
+    const changedPfpFunc = () => {
+        setChanged(true);
+    }
+
     return (
         <SafeAreaView style={styles.cotainer}>
                 <View style={styles.topContainer}>
@@ -102,6 +112,7 @@ const ProfileScreen = ({navigation}) => {
                 <FlatList 
                     style={{marginBottom: 100, marginTop: 10}}
                     contentContainerStyle={{marginBottom:100}}
+                    refreshControl={<RefreshControl refreshing={refreshing} onRefresh={changedPfpFunc} />}
                     data={posts}
                     renderItem={({item}) => (
                         <View style={{alignItems:"center", padding: 10}}>
@@ -111,7 +122,7 @@ const ProfileScreen = ({navigation}) => {
                                 genCarte={item.genre}
                                 imageuri={item.imgUrl}
                                 numeUser={item.ownerName}
-                                navigation={navigation}
+                                bookId={item.postId}
                             />
                         </View>
                     )}

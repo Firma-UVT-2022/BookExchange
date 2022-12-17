@@ -4,6 +4,8 @@ import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView, TouchableOpaci
 import { auth } from "../firebase";
 import { firestore } from "../firebase";
 
+import * as Animatable from 'react-native-animatable';
+
 const HomeScreen = ({navigation}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -53,9 +55,9 @@ const HomeScreen = ({navigation}) => {
 
     return (
         <KeyboardAvoidingView style={styles.container} behavior="padding">
-            <Text style={styles.headerText}>Create a new account</Text>
+            <Animatable.Text style={styles.headerText} animation="bounceInDown">Create a new account</Animatable.Text>
 
-            <View style={styles.inputContainer}>
+            <Animatable.View style={styles.inputContainer} animation="wobble" duration={2000}>
                 <TextInput
                     style={styles.input}
                     placeholder="First name"
@@ -81,13 +83,13 @@ const HomeScreen = ({navigation}) => {
                     onChangeText={text => setPassword(text)}
                     secureTextEntry={true}
                 />
-            </View>
+            </Animatable.View>
 
-            <View style={styles.buttonContainer}>
+            <Animatable.View style={styles.buttonContainer} animation="rubberBand">
                 <TouchableOpacity style={styles.button} onPress={handleSignUp}>
                     <Text style={styles.buttonText}>Register</Text>
                 </TouchableOpacity>
-            </View>
+            </Animatable.View>
         </KeyboardAvoidingView>
     )
 }
