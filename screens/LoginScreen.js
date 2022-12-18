@@ -57,7 +57,7 @@ const LoginScreen = ({navigation}) => {
                 </Animatable.View>
             </View>
 
-            <Animatable.View style={styles.buttonContainer} animation="fadeIn" duration={2200}>
+            <Animatable.View style={styles.buttonContainer} animation="fadeIn" duration={1800}>
                 <TouchableOpacity 
                     onPress={handleLogin}
                     style={styles.button}
@@ -68,9 +68,16 @@ const LoginScreen = ({navigation}) => {
 
                 <TouchableOpacity 
                     onPress={() => {navigation.navigate("Register")}}
-                    style={{margin: 15}}
+                    style={{marginTop: 15}}
                 >
                     <Text style={styles.signUpText}>Create a new account</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    onPress={() => {navigation.navigate("Forgot")}}
+                    style={{marginTop: 10}}
+                >
+                    <Text style={styles.forgotText}>Forgot password?</Text>
                 </TouchableOpacity>
                 
             </Animatable.View>
@@ -128,6 +135,11 @@ const styles = StyleSheet.create({
     },
     signUpText: {
         color: "#0872F9",
+        fontWeight: "320",
+        fontSize: 16,
+    },
+    forgotText: {
+        color: "#D93D3F",
         fontWeight: "320",
         fontSize: 16,
     },

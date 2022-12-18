@@ -115,7 +115,7 @@ export default function FilterPage() {
           onValueChange={(val) => setCounty(val)}
           save="value"
           data={counties}
-          placeholder={"Select the city you are in:"}
+          placeholder={"Select the county you are in:"}
         />
       </View>
       <View style={{ height: 20 }}></View>
