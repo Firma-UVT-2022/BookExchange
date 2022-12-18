@@ -4,6 +4,8 @@ import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, Vi
 import { useState } from "react";
 import { auth } from '../firebase';
 
+import * as Animatable from 'react-native-animatable';
+
 const LoginScreen = ({navigation}) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -32,25 +34,30 @@ const LoginScreen = ({navigation}) => {
             style={styles.container}
             behavior="padding"
         >
-            <Image source={require("../assets/logo.png")}/>
+            <Animatable.Image source={require("../assets/logo.png")} animation="bounceInDown"/>
 
             <View style={styles.inputContainer}>
-                <TextInput
-                    placeholder="Email"
-                    value={email}
-                    onChangeText={text => setEmail(text)}
-                    style={styles.input}
-                />
-                <TextInput
-                    placeholder="Password"
-                    value={password}
-                    onChangeText={text => setPassword(text)}
-                    secureTextEntry
-                    style={styles.input}
-                />
+                <Animatable.View animation="bounceInLeft" duration={1800}>
+                    <TextInput
+                        placeholder="Email"
+                        value={email}
+                        onChangeText={text => setEmail(text)}
+                        style={styles.input}
+                    />
+                </Animatable.View>
+
+                <Animatable.View animation="bounceInRight" duration={1800}>
+                    <TextInput
+                        placeholder="Password"
+                        value={password}
+                        onChangeText={text => setPassword(text)}
+                        secureTextEntry
+                        style={styles.input}
+                    />
+                </Animatable.View>
             </View>
 
-            <View style={styles.buttonContainer}>
+            <Animatable.View style={styles.buttonContainer} animation="fadeIn" duration={2200}>
                 <TouchableOpacity 
                     onPress={handleLogin}
                     style={styles.button}
@@ -66,7 +73,7 @@ const LoginScreen = ({navigation}) => {
                     <Text style={styles.signUpText}>Create a new account</Text>
                 </TouchableOpacity>
                 
-            </View>
+            </Animatable.View>
 
         </KeyboardAvoidingView>
     )

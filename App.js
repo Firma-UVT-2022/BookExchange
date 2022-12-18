@@ -15,17 +15,25 @@ import ChatsScreen from "./screens/ChatsScreen";
 import AddBookScreen from "./screens/AddBookScreen";
 import BookPage from "./screens/BookPage";
 import FilterPage from "./screens/FilterPage";
+import IntroScreen from "./screens/IntroScreen";
 
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen 
+          options={{ headerShown: false }}
+          name="Intro"
+          component={IntroScreen}
+        />
         <Stack.Screen
           options={{ headerShown: false }}
           name="Login"
           component={LoginScreen}
         />
-        <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen name="Register"
+         component={RegisterScreen} 
+         />
         <Stack.Screen
           name="Add"
           options={{ headerShown: false }}

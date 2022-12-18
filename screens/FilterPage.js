@@ -13,6 +13,7 @@ import { useRoute, useNavigation } from "@react-navigation/native";
 import { SelectList } from "react-native-dropdown-select-list";
 
 const genres = [
+  { key: "0", value: "All genres" },
   { key: "1", value: "Fantasy" },
   { key: "2", value: "Adventure" },
   { key: "3", value: "Romance" },
@@ -30,6 +31,7 @@ const genres = [
 ];
 
 const counties = [
+  { key: "0", value: "All counties" },
   { key: "1", value: "Alba" },
   { key: "2", value: "Arad" },
   { key: "3", value: "Arges" },
@@ -92,6 +94,10 @@ export default function FilterPage() {
 
   return (
     <View style={styles.container}>
+      <Text style={{fontSize: 32, padding: 10, fontWeight: "300"}}>
+        Filter books
+      </Text>
+
       <View style={styles.dropDownContainer}>
         <SelectList
           boxStyles={{ backgroundColor: "white" }}
@@ -147,7 +153,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 15,
-    elevation: 10,
+    elevation: 15,
     padding: 5,
   },
 });

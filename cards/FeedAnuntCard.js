@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     color: "#08021a",
-    fontStyle: "italic",
+    fontStyle: "",
   },
   designbar_properties: {
     width: "100%",

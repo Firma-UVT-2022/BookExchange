@@ -3,9 +3,11 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Alert,
   Image,
   ImageBackground,
 } from "react-native";
+import { firestore, storage } from "../firebase";
 
 const icon_writer = "https://cdn-icons-png.flaticon.com/512/1948/1948210.png";
 const icon_booktype = "https://cdn-icons-png.flaticon.com/512/5768/5768762.png";
@@ -64,16 +66,25 @@ export default function CardAnunt({
   numeAutor,
   genCarte,
   imageuri,
-  numeUser,
-  navigation,
-  undeNavighez,
+  bookId,
+  numeUser, 
 }) {
   return (
     <TouchableOpacity
       style={styles.card}
-      onPress={() => {
-        navigation.navigate("Profile");
-      }}
+      onLongPress={() => { Alert.alert("Delete " + numeCarte, "Do you want to delete this book?", [
+        {
+          text: 'Cancel',
+        },
+        {
+          text: 'Yes', 
+          onPress: async () => {
+            await storage.refFromURL(imageuri).delete();
+            await firestore.collection("books").doc(bookId).delete();
+            alert("Succesfully deleted book!");
+          }
+        },
+      ], {cancelable: false}) }}
     >
       {/*pe ce pagina intri dupa ce apesi anuntul*/}
       <Imagine_Carte img_url={imageuri} />
@@ -150,7 +161,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     color: "#08021a",
-    fontStyle: "italic",
+    fontStyle: "",
   },
   designbar_properties: {
     width: "100%",
