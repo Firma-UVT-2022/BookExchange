@@ -119,9 +119,9 @@ export function DetaliiCarte({
         <Locatie locatie={locatie} />
       </View>
       <ImagineCarte imgurl={imgCarte} />
-      <View style={{ height: 10 }}></View>
+      {/* <View style={{ height: 10 }}></View> */}
       <Chenare numeAutor={numeAutor} genCarte={genCarte} />
-      <View style={{ height: 10 }}></View>
+      {/* <View style={{ height: 10 }}></View> */}
       <User numeUser={numeUser} pfpOwner={pfpOwner} />
     </View>
   );
@@ -155,7 +155,7 @@ export default function BookPage({
   return (
     <View style={styles.container}>
       <Header bookName={route.params.numeCarte}></Header>
-      <View style={{ height: 20 }}></View>
+      {/* <View style={{ height: "5%" }}></View> */}
       <DetaliiCarte
         imgCarte={route.params.imgCarte}
         numeAutor={route.params.numeAutor}
@@ -164,7 +164,7 @@ export default function BookPage({
         pfpOwner={route.params.pfpOwner}
         locatie={route.params.locatie}
       />
-      <View style={{ height: 40 }}></View>
+      {/* <View style={{ height: "5%" }}></View> */}
       <TouchableOpacity
         style={styles.buton_mesaj}
         onPress={() => {
@@ -189,12 +189,13 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
     flex: 1,
     alignItems: "center",
+    justifyContent: "space-between"
   },
   header: {
     flexDirection: "row",
     backgroundColor: "#5792F9",
     width: "100%",
-    height: 100,
+    height: "10%",
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
     elevation: 10,
@@ -215,17 +216,18 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
   detalii: {
-    paddingTop: 10,
+    justifyContent: "space-evenly",
     width: "95%",
-    height: 480,
+    height: "70%",
     backgroundColor: "#87a0f5",
     borderRadius: 15,
     elevation: 10,
   },
   buton_mesaj: {
+    marginBottom: 10,
     flexDirection: "row",
     width: "50%",
-    height: 80,
+    height: "10%",
     backgroundColor: "#5792F9",
     alignItems: "center",
     justifyContent: "center",
@@ -234,10 +236,9 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   parte_imagine: {
-    paddingTop: 10,
     flexDirection: "row",
     width: "100%",
-    height: 230,
+    height: "50%",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -251,7 +252,7 @@ const styles = StyleSheet.create({
   rand_chenare: {
     flexDirection: "row",
     width: "100%",
-    height: 70,
+    height: "12%",
     alignItems: "center",
     justifyContent: "space-around",
   },
@@ -280,7 +281,7 @@ const styles = StyleSheet.create({
   },
   user_rand: {
     width: "100%",
-    height: 70,
+    height: "15%",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -316,7 +317,7 @@ const styles = StyleSheet.create({
   locatie_container: {
     flexDirection: "row",
     width: "60%",
-    height: 70,
+    height: "100%",
     alignItems: "center",
     justifyContent: "space-evenly",
     backgroundColor: "#87a0f5",
@@ -326,7 +327,7 @@ const styles = StyleSheet.create({
   },
   rand_centru: {
     width: "100%",
-    height: 70,
+    height: "15%",
     alignItems: "center",
     justifyContent: "center",
   },
