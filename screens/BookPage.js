@@ -83,7 +83,8 @@ export function Chenare({ numeAutor, genCarte }) {
   );
 }
 
-export function User({ numeUser, pfpOwner }) {
+export function User({numeUser, pfpOwner, ownerId }) {
+  const navigation = useNavigation();
   return (
     <View style={styles.user_rand}>
       <View style={styles.user_chenar}>
@@ -97,9 +98,9 @@ export function User({ numeUser, pfpOwner }) {
             />
           </View>
         </View>
-        <View style={styles.numeUser_parte}>
+        <TouchableOpacity style={styles.numeUser_parte} onPress={() => {navigation.navigate("OthersProfile", {ownerId: ownerId})}}>
           <Text style={{ fontSize: 20, fontWeight: "500" }}>{numeUser}</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -112,6 +113,7 @@ export function DetaliiCarte({
   numeUser,
   pfpOwner,
   locatie,
+  ownerId,
 }) {
   return (
     <View style={styles.detalii}>
@@ -122,7 +124,7 @@ export function DetaliiCarte({
       {/* <View style={{ height: 10 }}></View> */}
       <Chenare numeAutor={numeAutor} genCarte={genCarte} />
       {/* <View style={{ height: 10 }}></View> */}
-      <User numeUser={numeUser} pfpOwner={pfpOwner} />
+      <User numeUser={numeUser} pfpOwner={pfpOwner} ownerId={ownerId} />
     </View>
   );
 }
@@ -149,6 +151,7 @@ export default function BookPage({
   numeUser,
   pfpOwner,
   locatie,
+  onwerId,
 }) {
   const route = useRoute();
   const navigation = useNavigation();
@@ -163,6 +166,7 @@ export default function BookPage({
         numeUser={route.params.numeUser}
         pfpOwner={route.params.pfpOwner}
         locatie={route.params.locatie}
+        ownerId={route.params.ownerId}
       />
       {/* <View style={{ height: "5%" }}></View> */}
       <TouchableOpacity

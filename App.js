@@ -17,6 +17,7 @@ import BookPage from "./screens/BookPage";
 import FilterPage from "./screens/FilterPage";
 import IntroScreen from "./screens/IntroScreen";
 import ForgotScreen from "./screens/ForgotScreen";
+import OthersProfileScreen from "./screens/OthersProfileScreen";
 
 export default function App() {
   return (
@@ -59,6 +60,11 @@ export default function App() {
           name="Filter"
           options={{ headerShown: false }}
           component={FilterPage}
+        />
+        <Stack.Screen 
+          name="OthersProfile"
+          options={{ headerShown: false }}
+          component={OthersProfileScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
