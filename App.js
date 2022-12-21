@@ -11,18 +11,19 @@ import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import HomeScreen from "./screens/HomeScreen";
 import ProfileScreen from "./screens/ProfileScreen";
-import ChatsScreen from "./screens/ChatsScreen";
 import AddBookScreen from "./screens/AddBookScreen";
 import BookPage from "./screens/BookPage";
 import FilterPage from "./screens/FilterPage";
 import IntroScreen from "./screens/IntroScreen";
 import ForgotScreen from "./screens/ForgotScreen";
+import MessagesPage from "./screens/MessagesScreen";
+import ChatScreen from "./screens/Chat";
 
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen 
+        <Stack.Screen
           options={{ headerShown: false }}
           name="Intro"
           component={IntroScreen}
@@ -32,14 +33,14 @@ export default function App() {
           name="Login"
           component={LoginScreen}
         />
-        <Stack.Screen 
+        <Stack.Screen
           options={{ headerShown: false }}
           name="Forgot"
           component={ForgotScreen}
         />
         <Stack.Screen name="Register"
-         component={RegisterScreen} 
-         />
+          component={RegisterScreen}
+        />
         <Stack.Screen
           name="Add"
           options={{ headerShown: false }}
@@ -59,6 +60,11 @@ export default function App() {
           name="Filter"
           options={{ headerShown: false }}
           component={FilterPage}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Chat"
+          component={ChatScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
@@ -103,7 +109,7 @@ function Tabs() {
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Chats" component={ChatsScreen} />
+      <Tab.Screen name="Chats" component={MessagesPage} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );

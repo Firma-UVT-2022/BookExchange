@@ -103,6 +103,7 @@ const HomeScreen = () => {
               navigation={navigation}
               pfpOwner={item.pfpOwner}
               locatie={item.county}
+              ownerID={item.ownerID}
             />
           </View>
         )}
