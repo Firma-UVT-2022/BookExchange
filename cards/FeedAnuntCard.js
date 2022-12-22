@@ -70,7 +70,7 @@ export default function CardAnunt({
   navigation,
   pfpOwner,
   locatie,
-  ownerId,
+  ownerID,
 }) {
   return (
     <TouchableOpacity
@@ -84,7 +84,7 @@ export default function CardAnunt({
           numeUser: numeUser,
           pfpOwner: pfpOwner,
           locatie: locatie,
-          ownerId: ownerId,
+          ownerID: ownerID,
         });
       }}
     >

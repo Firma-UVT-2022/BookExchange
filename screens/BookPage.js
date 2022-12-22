@@ -151,7 +151,7 @@ export default function BookPage({
   numeUser,
   pfpOwner,
   locatie,
-  onwerId,
+  ownerID,
 }) {
   const route = useRoute();
   const navigation = useNavigation();
@@ -172,7 +172,7 @@ export default function BookPage({
       <TouchableOpacity
         style={styles.buton_mesaj}
         onPress={() => {
-          navigation.navigate("Chats");
+          navigation.navigate("Chat", { id: route.params.ownerID });
         }}
       >
         <Image
