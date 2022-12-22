@@ -18,6 +18,7 @@ import IntroScreen from "./screens/IntroScreen";
 import ForgotScreen from "./screens/ForgotScreen";
 import MessagesPage from "./screens/MessagesScreen";
 import ChatScreen from "./screens/Chat";
+import OthersProfileScreen from "./screens/OthersProfileScreen";
 
 export default function App() {
   return (
@@ -50,6 +51,11 @@ export default function App() {
           name="Tabs"
           options={{ headerShown: false }}
           component={Tabs}
+        />
+        <Stack.Screen 
+          name="OthersProfile"
+          options={{ headerShown: false }}
+          component={OthersProfileScreen}
         />
         <Stack.Screen
           name="BookPage"

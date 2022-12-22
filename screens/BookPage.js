@@ -8,6 +8,9 @@ import {
 } from "react-native";
 
 import { useRoute, useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native";
+
+import * as Animatable from "react-native-animatable";
 
 export function Header({ bookName }) {
   return (
@@ -156,7 +159,7 @@ export default function BookPage({
   const route = useRoute();
   const navigation = useNavigation();
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Header bookName={route.params.numeCarte}></Header>
       {/* <View style={{ height: "5%" }}></View> */}
       <DetaliiCarte
@@ -166,9 +169,9 @@ export default function BookPage({
         numeUser={route.params.numeUser}
         pfpOwner={route.params.pfpOwner}
         locatie={route.params.locatie}
-        ownerId={route.params.ownerId}
+        ownerId={route.params.ownerID}
       />
-      {/* <View style={{ height: "5%" }}></View> */}
+      
       <TouchableOpacity
         style={styles.buton_mesaj}
         onPress={() => {
@@ -180,11 +183,11 @@ export default function BookPage({
           source={{
             uri: "https://cdn-icons-png.flaticon.com/512/2462/2462719.png",
           }}
-        ></Image>
+        />
         <View style={{ width: 10 }}></View>
         <Text style={{ fontSize: 18, fontWeight: "bold" }}>Message User</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -197,7 +200,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: "row",
-    backgroundColor: "#5792F9",
+    backgroundColor: "#2490ef",
     width: "100%",
     height: "10%",
     borderBottomLeftRadius: 15,
@@ -205,7 +208,6 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   header_parteText: {
-    width: "80%",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -217,18 +219,17 @@ const styles = StyleSheet.create({
   book_title: {
     fontSize: 25,
     fontWeight: "bold",
-    fontStyle: "italic",
   },
   detalii: {
     justifyContent: "space-evenly",
     width: "95%",
     height: "70%",
-    backgroundColor: "#87a0f5",
+    backgroundColor: "#5792F9",
     borderRadius: 15,
     elevation: 10,
   },
   buton_mesaj: {
-    marginBottom: 10,
+    marginBottom: 15,
     flexDirection: "row",
     width: "50%",
     height: "10%",
@@ -237,7 +238,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 15,
     elevation: 10,
-    padding: 5,
   },
   parte_imagine: {
     flexDirection: "row",

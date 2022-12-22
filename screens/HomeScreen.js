@@ -64,7 +64,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={styles.cotainer}>
+    <SafeAreaView style={styles.cotainer}>
       <View style={styles.topBar}>
         <FeedName />
         <View style={styles.feed_filter}>
@@ -108,7 +108,7 @@ const HomeScreen = () => {
           </View>
         )}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
