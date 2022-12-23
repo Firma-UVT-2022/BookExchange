@@ -46,20 +46,18 @@ const ProfileScreen = ({ navigation }) => {
   }, [changedPfp]);
 
   useEffect(() => {
-    firestore.collection("books").onSnapshot((querrySnapshot) => {
-      const tempPosts = [];
-
-      querrySnapshot.forEach((documentSnapshot) => {
-        const buffer = documentSnapshot.data();
-        if (buffer.ownerID === auth.currentUser.uid) {
-          tempPosts.push({
-            ...buffer,
-          });
-        }
+    const unsubscribe = firestore
+      .collection("books")
+      .where("ownerID", "==", auth.currentUser.uid)
+      .onSnapshot((querySnapshot) => {
+        const tempPosts = [];
+        querySnapshot.forEach((doc) => {
+          tempPosts.push(doc.data());
+        });
+        setPosts(tempPosts);
       });
 
-      setPosts(tempPosts);
-    });
+    return () => unsubscribe();
   }, []);
 
   let imguri = null;
@@ -139,7 +137,7 @@ const ProfileScreen = ({ navigation }) => {
         style={{ marginBottom: 100, marginTop: 10 }}
         contentContainerStyle={{ marginBottom: 100 }}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={changedPfpFunc} />
+          <RefreshControl refreshing={changedPfp} onRefresh={changedPfpFunc} />
         }
         data={posts}
         renderItem={({ item }) => (

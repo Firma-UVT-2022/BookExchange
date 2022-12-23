@@ -1,5 +1,5 @@
 import { useIsFocused } from "@react-navigation/native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   StyleSheet,
   View,
@@ -56,7 +56,6 @@ export default function MessagesPage({ navigation }) {
         .where("userId", "in", arrayids)
         .where("userId", "!=", auth.currentUser.uid)
         .get();
-
       const allUsers = querySnap.docs.map((doc) => doc.data());
       const sortedUsers = await Promise.all(
         allUsers.map(async (a) => {
@@ -88,10 +87,30 @@ export default function MessagesPage({ navigation }) {
 
   const isFocused = useIsFocused();
 
+  const isFocusedRef = useRef(false);
+  const handleFocus = () => {
+    isFocusedRef.current = true;
+  };
+  const handleBlur = () => {
+    isFocusedRef.current = false;
+  };
+
   useEffect(() => {
-    getUsers();
-    setRefreshing(false);
-  }, [isFocused, user, refreshing]);
+    const unsubscribeFocus = navigation.addListener("focus", handleFocus);
+    const unsubscribeBlur = navigation.addListener("blur", handleBlur);
+
+    return () => {
+      unsubscribeFocus();
+      unsubscribeBlur();
+    };
+  }, [isFocused]);
+
+  useEffect(() => {
+    if (isFocusedRef.current) {
+      getUsers();
+      setRefreshing(false);
+    }
+  }, [isFocusedRef.current, user, refreshing]);
 
   const Refresher = () => {
     setRefreshing(true);

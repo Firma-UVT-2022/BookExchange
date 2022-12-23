@@ -31,7 +31,6 @@ export default function ChatScreen() {
           setUser(snapshot.data());
         }
       });
-
     firestore
       .collection("users")
       .doc(destUserId)
@@ -119,12 +118,22 @@ export default function ChatScreen() {
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: StatusBar.currentHeight }}>
       <View style={styles.topBar}>
-        <TouchableOpacity onPress={() => { navigation.goBack() }}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
           <Ionicons name={"arrow-back-outline"} size={40} />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => { navigation.navigate("OthersProfile", { ownerId: destUserId }) }}>
-          <Text style={styles.name}>{destUserData.firstname} {destUserData.lastname}</Text>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("OthersProfile", { ownerId: destUserId });
+          }}
+        >
+          <Text style={styles.name}>
+            {destUserData.firstname} {destUserData.lastname}
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -136,7 +145,9 @@ export default function ChatScreen() {
           _id: currUserId,
           avatar: user.pfp,
         }}
-        onPressAvatar={() => { navigation.navigate("OthersProfile", { ownerId: destUserId }) }}
+        onPressAvatar={() => {
+          navigation.navigate("OthersProfile", { ownerId: destUserId });
+        }}
       />
     </SafeAreaView>
   );
@@ -160,4 +171,4 @@ const styles = StyleSheet.create({
     left: 10,
     top: 0,
   },
-})
+});

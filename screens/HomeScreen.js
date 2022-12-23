@@ -40,23 +40,26 @@ const HomeScreen = () => {
   }
 
   useEffect(() => {
-    firestore.collection("books").onSnapshot((querrySnapshot) => {
-      const tempPosts = [];
-      querrySnapshot.forEach((documentSnapshot) => {
-        const buffer = documentSnapshot.data();
-        if (
-          buffer.ownerID !== auth.currentUser.uid &&
-          (buffer.county === county || county == null || county == "All counties") &&
-          (buffer.genre === genre || genre == null || genre == "All genres")
-        ) {
-          tempPosts.push({
-            ...buffer,
-          });
-        }
+    const unsubscribe = firestore
+      .collection("books")
+      .where("ownerID", "!=", auth.currentUser.uid)
+      .onSnapshot((querrySnapshot) => {
+        const tempPosts = [];
+        querrySnapshot.forEach((documentSnapshot) => {
+          const buffer = documentSnapshot.data();
+          if (
+            (buffer.county === county ||
+              county == null ||
+              county == "All counties") &&
+            (buffer.genre === genre || genre == null || genre == "All genres")
+          ) {
+            tempPosts.push(buffer);
+          }
+        });
+        setPosts(tempPosts);
+        setFiltered(false);
       });
-      setPosts(tempPosts);
-    });
-    setFiltered("False");
+    return () => unsubscribe();
   }, [county, genre, filtered]);
 
   const Filtrare = () => {
@@ -126,7 +129,7 @@ export function FeedName() {
           uri: "https://cdn-icons-png.flaticon.com/512/5868/5868234.png",
         }}
       />
-      <Text style={{ fontSize: 25, padding: 10, fontWeight: "bold", }}>
+      <Text style={{ fontSize: 25, padding: 10, fontWeight: "bold" }}>
         Feed
       </Text>
     </View>
