@@ -19,6 +19,8 @@ import { firestore } from "../firebase";
 import { auth } from "../firebase";
 import { storage } from "../firebase";
 
+import * as Animatable from 'react-native-animatable';
+
 const AddBookScreen = ({ navigation }) => {
   const [userData, setData] = useState("");
 
@@ -189,15 +191,15 @@ const AddBookScreen = ({ navigation }) => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.cotainer}>
-      <View style={styles.topContainer}>
+    <KeyboardAvoidingView style={styles.cotainer} behavior={Platform.OS === "ios" ? "padding" : undefined}>
+      <Animatable.View style={styles.topContainer} animation="bounceInDown" duration={1500}>
         <TouchableOpacity style={styles.imgContainer} onPress={pickImage}>
           <Image style={styles.img} source={{ uri: imguri }} />
         </TouchableOpacity>
         <Text style={styles.textImg}>Tap to add an image of the book</Text>
-      </View>
+      </Animatable.View>
 
-      <View style={styles.inputContainer}>
+      <Animatable.View style={styles.inputContainer} animation="bounceIn" duration={2000}>
         <TextInput
           placeholder="Book name"
           value={bookName}
@@ -210,9 +212,9 @@ const AddBookScreen = ({ navigation }) => {
           onChangeText={(text) => setAuthorName(text)}
           style={styles.input}
         />
-      </View>
+      </Animatable.View>
 
-      <View style={styles.dropDownContainer}>
+      <Animatable.View style={styles.dropDownContainer} animation="bounceIn" duration={2000}>
         <SelectList
           boxStyles={{ backgroundColor: "white" }}
           dropdownStyles={{ backgroundColor: "white", borderColor: "#2490ef" }}
@@ -229,11 +231,13 @@ const AddBookScreen = ({ navigation }) => {
           data={counties}
           placeholder={"Select your county"}
         />
-      </View>
+      </Animatable.View>
 
-      <TouchableOpacity onPress={postBook} style={styles.button}>
-        <Text style={styles.buttonText}>Add a new book!</Text>
-      </TouchableOpacity>
+      <Animatable.View style={{width: "100%", alignItems: "center"}} animation="bounceInUp" duration={1500}>
+        <TouchableOpacity onPress={postBook} style={styles.button}>
+         <Text style={styles.buttonText}>Add a new book!</Text>
+        </TouchableOpacity>
+      </Animatable.View>
     </KeyboardAvoidingView>
   );
 };

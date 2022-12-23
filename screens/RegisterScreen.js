@@ -29,7 +29,8 @@ const HomeScreen = ({navigation}) => {
             if(!signUpError){
                 auth.currentUser.sendEmailVerification({
                     handleCodeInApp: true,
-                    url: "https://bookexchange-d2fd4.firebaseapp.com"
+                    //url: "https://bookexchange-d2fd4.firebaseapp.com"
+                    url: "https://book-exchange-3ce95.firebaseapp.com"
                 })
                 .then(() => {
                     alert("Verification email sent");
@@ -54,7 +55,7 @@ const HomeScreen = ({navigation}) => {
     }
 
     return (
-        <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : undefined}>
             <Animatable.Text style={styles.headerText} animation="bounceInDown">Create a new account</Animatable.Text>
 
             <Animatable.View style={styles.inputContainer} animation="wobble" duration={2000}>

@@ -1,3 +1,4 @@
+import { useIsFocused } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
@@ -33,6 +34,8 @@ export default function MessagesPage({ navigation }) {
       });
   }, []);
 
+  const [newMessage, setMes] = useState("");
+
   const getUsers = async () => {
     if (!user) return;
     const chatQuerySnap = await firestore.collection("Chats").get();
@@ -65,6 +68,8 @@ export default function MessagesPage({ navigation }) {
               ? auth.currentUser.uid + "-" + a.userId
               : a.userId + "-" + auth.currentUser.uid;
           const cola = await firestore.collection("Chats").doc(chatida).get();
+          setMes(cola.data().msg);
+          //console.log(newMessage);
           const locatieUser = await firestore
             .collection("users")
             .doc(cola.data().whosent)
@@ -80,22 +85,23 @@ export default function MessagesPage({ navigation }) {
       ).then((allUsers) =>
         allUsers.sort((a, b) => b.da.seconds - a.da.seconds)
       );
-
       setUsers(sortedUsers);
     } else {
       setUsers(null);
     }
   };
+
+  const isFocused = useIsFocused();
+
   useEffect(() => {
     getUsers();
     setRefreshing(false);
-  }, [user, users, refreshing]);
-  //console.log(users);
+  }, [isFocused, user, refreshing]);
+  
   const Refresher = () => {
     setRefreshing(true);
   };
 
-  //const chatid = users > currUserId ? currUserId + "-" + destUserId : destUserId + "-" + currUserId
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
