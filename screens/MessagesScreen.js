@@ -89,7 +89,7 @@ export default function MessagesPage({ navigation }) {
   useEffect(() => {
     getUsers();
     setRefreshing(false);
-  }, [user, users, refreshing]);
+  }, [user, refreshing]);
   //console.log(users);
   const Refresher = () => {
     setRefreshing(true);

@@ -26,7 +26,6 @@ export default function ChatScreen() {
   const destUserId = route.params.id;
   const onSend = (msgArray) => {
     const msg = msgArray[0];
-    console.log(msg);
     const usermsg = {
       ...msg,
       sentBy: currUserId,
@@ -73,6 +72,29 @@ export default function ChatScreen() {
 
   useEffect(() => {
     getAllMessages();
+    const chatid =
+      destUserId > currUserId
+        ? currUserId + "-" + destUserId
+        : destUserId + "-" + currUserId;
+    const unsubscribe = firestore
+      .collection("Chats")
+      .doc(chatid)
+      .collection("messages")
+      .orderBy("createdAt", "desc")
+      .onSnapshot((snapshot) => {
+        const newMessages = snapshot.docs.map((doc) => {
+          return {
+            ...doc.data(),
+            createdAt: doc.data().createdAt.toDate(),
+          };
+        });
+        setMessages(newMessages);
+      });
+
+    // Unsubscribe from updates when component unmounts
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return (
