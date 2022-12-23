@@ -1,3 +1,4 @@
+import { useIsFocused } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
@@ -19,7 +20,6 @@ export default function MessagesPage({ navigation }) {
   const [user, setUser] = useState("");
   const [users, setUsers] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
-  const [daca, setDaca] = useState(false);
 
   useEffect(() => {
     firestore
@@ -80,22 +80,23 @@ export default function MessagesPage({ navigation }) {
       ).then((allUsers) =>
         allUsers.sort((a, b) => b.da.seconds - a.da.seconds)
       );
-
       setUsers(sortedUsers);
     } else {
       setUsers(null);
     }
   };
+
+  const isFocused = useIsFocused();
+
   useEffect(() => {
     getUsers();
     setRefreshing(false);
-  }, [user, refreshing]);
-  //console.log(users);
+  }, [isFocused, user, refreshing]);
+
   const Refresher = () => {
     setRefreshing(true);
   };
 
-  //const chatid = users > currUserId ? currUserId + "-" + destUserId : destUserId + "-" + currUserId
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>

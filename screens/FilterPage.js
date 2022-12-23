@@ -12,6 +12,8 @@ import { useState } from "react";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { SelectList } from "react-native-dropdown-select-list";
 
+import * as Animatable from 'react-native-animatable';
+
 const genres = [
   { key: "0", value: "All genres" },
   { key: "1", value: "Fantasy" },
@@ -94,11 +96,13 @@ export default function FilterPage() {
 
   return (
     <View style={styles.container}>
-      <Text style={{fontSize: 32, padding: 10, fontWeight: "300"}}>
-        Filter books
-      </Text>
+      <Animatable.View animation="bounceInDown" duration={1500}>
+        <Text style={{fontSize: 32, padding: 10, fontWeight: "300"}}>
+          Filter books
+        </Text>
+      </Animatable.View>
 
-      <View style={styles.dropDownContainer}>
+      <Animatable.View style={styles.dropDownContainer} animation="bounceIn" duration={2000}>
         <SelectList
           boxStyles={{ backgroundColor: "white" }}
           dropdownStyles={{ backgroundColor: "white", borderColor: "#2490ef" }}
@@ -117,20 +121,23 @@ export default function FilterPage() {
           data={counties}
           placeholder={"Select the county you are in:"}
         />
-      </View>
+      </Animatable.View>
       <View style={{ height: 20 }}></View>
-      <TouchableOpacity style={styles.buton_mesaj} onPress={handleApplyFilter}>
-        <Image
-          style={{ width: 35, height: 35 }}
-          source={{
-            uri: "https://cdn-icons-png.flaticon.com/512/7728/7728658.png",
-          }}
-        ></Image>
-        <View style={{ width: 10 }}></View>
-        <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-          Save Preferences
-        </Text>
-      </TouchableOpacity>
+
+      <Animatable.View style={{width: "100%", alignItems: "center"}} animation="bounceInUp" duration={1500}>
+        <TouchableOpacity style={styles.buton_mesaj} onPress={handleApplyFilter}>
+          <Image
+            style={{ width: 35, height: 35 }}
+            source={{
+              uri: "https://cdn-icons-png.flaticon.com/512/7728/7728658.png",
+            }}
+          />
+          <View style={{ width: 10 }}></View>
+          <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+            Save Preferences
+          </Text>
+        </TouchableOpacity>
+      </Animatable.View>
     </View>
   );
 }

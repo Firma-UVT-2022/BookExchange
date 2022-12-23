@@ -32,9 +32,9 @@ const LoginScreen = ({navigation}) => {
     return (
         <KeyboardAvoidingView 
             style={styles.container}
-            behavior="padding"
+            behavior={Platform.OS === "ios" ? "padding" : undefined}
         >
-            <Animatable.Image source={require("../assets/logo.png")} animation="bounceInDown"/>
+            <Animatable.Image style={{height: "40%", width: "100%"}} source={require("../assets/logo.png")} animation="bounceInDown"/>
 
             <View style={styles.inputContainer}>
                 <Animatable.View animation="bounceInLeft" duration={1800}>
