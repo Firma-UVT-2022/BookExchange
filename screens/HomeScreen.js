@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  SafeAreaView,
   Button,
   TouchableOpacity,
   Image,
@@ -13,6 +12,8 @@ import {
   ImageBackground,
 } from "react-native";
 import { useState, useEffect } from "react";
+
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { firestore } from "../firebase";
 import { auth } from "../firebase";
@@ -138,7 +139,7 @@ export function FeedName() {
 
 const styles = StyleSheet.create({
   cotainer: {
-    paddingTop: StatusBar.currentHeight,
+    //paddingTop: StatusBar.currentHeight,
     flex: 1,
   },
   topBar: {

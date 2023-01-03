@@ -10,9 +10,10 @@ import {
   TouchableOpacity,
   Image,
   RefreshControl,
-  SafeAreaView,
   StatusBar,
 } from "react-native";
+
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { firestore, auth } from "../firebase";
 
@@ -163,7 +164,7 @@ export default function MessagesPage({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: StatusBar.currentHeight,
+    //paddingTop: StatusBar.currentHeight,
   },
   header: {
     width: "100%",
