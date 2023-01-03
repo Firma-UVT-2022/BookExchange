@@ -156,8 +156,6 @@ const AddBookScreen = ({ navigation }) => {
       return;
     }
 
-    let pfpUser = await storage.ref("pfps/" + userData.userId).getDownloadURL();
-
     // upload book data
     const doc = await firestore
       .collection("books")
@@ -167,7 +165,7 @@ const AddBookScreen = ({ navigation }) => {
         genre: genre,
         county: county,
         ownerID: userData.userId,
-        pfpOwner: pfpUser,
+        pfpOwner: userData.pfp,
         ownerName: userData.firstname + "  " + userData.lastname,
       })
       .catch((error) => {

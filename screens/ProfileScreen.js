@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 30,
     fontWeight: "500",
-    //color: "white",
+    color: "black",
     left: 10,
     top: -5,
   },
