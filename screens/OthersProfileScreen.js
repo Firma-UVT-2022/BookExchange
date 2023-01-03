@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     name: {
         fontSize: 30,
         fontWeight: "500",
-        color: "white",
+        color: "black",
         left: 10,
         top: -5,
     },
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
         width: 60,
         height: 60,
         borderRadius: 30,
-        borderColor: "#07d9f9",
+        borderColor: "black",
         borderWidth: 2
     },
     button:{
