@@ -6,7 +6,7 @@ import { firestore, auth, firebase } from "../firebase";
 import { StyleSheet } from "react-native";
 import { StatusBar } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ChatScreen() {
   const navigation = useNavigation();
@@ -116,7 +116,7 @@ export default function ChatScreen() {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1, paddingTop: StatusBar.currentHeight }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.topBar}>
         <TouchableOpacity
           onPress={() => {

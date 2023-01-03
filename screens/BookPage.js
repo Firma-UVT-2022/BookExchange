@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 import { useRoute, useNavigation } from "@react-navigation/native";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import * as Animatable from "react-native-animatable";
 
@@ -89,7 +89,7 @@ export function Chenare({ numeAutor, genCarte }) {
 export function User({numeUser, pfpOwner, ownerId }) {
   const navigation = useNavigation();
   return (
-    <View style={styles.user_rand}>
+    <TouchableOpacity style={styles.user_rand} onPress={() => {navigation.navigate("OthersProfile", {ownerId: ownerId})}}>
       <View style={styles.user_chenar}>
         <View style={styles.imagine_profil_user}>
           <View style={styles.stil_imgprofil}>
@@ -101,11 +101,11 @@ export function User({numeUser, pfpOwner, ownerId }) {
             />
           </View>
         </View>
-        <TouchableOpacity style={styles.numeUser_parte} onPress={() => {navigation.navigate("OthersProfile", {ownerId: ownerId})}}>
+        <View style={styles.numeUser_parte}>
           <Text style={{ fontSize: 20, fontWeight: "500" }}>{numeUser}</Text>
-        </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -193,7 +193,7 @@ export default function BookPage({
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: StatusBar.currentHeight,
+    //paddingTop: StatusBar.currentHeight,
     flex: 1,
     alignItems: "center",
     justifyContent: "space-between"

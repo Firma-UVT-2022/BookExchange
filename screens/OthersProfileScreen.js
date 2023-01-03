@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
-import { StyleSheet, Text, View, SafeAreaView, Button,
+import { StyleSheet, Text, View, Button,
      TouchableOpacity, Image, ScrollView, StatusBar, Platform, FlatList } from "react-native";
 import { useState, useEffect } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { firestore } from "../firebase";
 import { auth } from "../firebase";
@@ -47,9 +48,7 @@ const OthersProfileScreen = ({navigation, ownerId}) => {
     return (
         <SafeAreaView style={styles.cotainer}>
                 <View style={styles.topContainer}>
-                    <TouchableOpacity onPress={()=>{}}>
-                        <Image style={styles.pfp} source={{uri: otherUserData.pfp}}/>
-                    </TouchableOpacity>
+                    <Image style={styles.pfp} source={{uri: otherUserData.pfp}}/>
 
                     <Text style={styles.name}>{otherUserData.firstname} {otherUserData.lastname}</Text>
                 </View>
@@ -80,7 +79,7 @@ export default OthersProfileScreen
 const styles = StyleSheet.create({
     cotainer: {
         flex: 1,
-        paddingTop: StatusBar.currentHeight, 
+        //paddingTop: StatusBar.currentHeight, 
         //justifyContent: "center",
         //alignItems: "center",
     },

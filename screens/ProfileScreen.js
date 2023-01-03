@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  SafeAreaView,
   Button,
   TouchableOpacity,
   Image,
@@ -14,6 +13,8 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import * as ImagePicker from "expo-image-picker";
+
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { firestore } from "../firebase";
 import { auth } from "../firebase";
@@ -162,7 +163,7 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
   cotainer: {
     flex: 1,
-    paddingTop: StatusBar.currentHeight,
+    //paddingTop: StatusBar.currentHeight,
     //justifyContent: "center",
     //alignItems: "center",
   },
