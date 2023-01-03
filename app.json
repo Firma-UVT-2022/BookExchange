@@ -24,7 +24,7 @@
       "package": "firmauvt.bookexchange",
       "versionCode": 1,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/appIcon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
